@@ -48,12 +48,48 @@
     <div class="scoring rules"></div> <!-- This div is for the way we mathmatical calculated the score-->
 </div>
 <script>
+    specialChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
     function scorePassword() {
         let password = document.getElementById("password");
-        let score = 100; //This is the final score for the password
+        let score; //This is the final score for the password
+
+
+
         document.getElementById("score").innerHTML = score; // This will display that score underneath the password
         
     }
+
+    function checkLength(password) {
+        return password.length * 4;
+    }
+
+    //Function for counting the different characters and returning the score of them together.
+    function checkLowerUpperNumSym(password){
+
+        specialChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
+        lower = 0;
+        upper = 0;
+        num = 0;
+        sym = 0;
+        diffchar = 0;
+        for(i = 0; i < password.length; i++){
+            if(password[i] >= '0' && password[i] <= '9'){
+                num++;
+            }
+            else if(password[i] == password[i].toLowerCase()){
+                lower++;
+            }
+            else if(password[i] == password[i].toUpperCase()){
+                upper++;
+            }
+            else if(password[i].match(specialChars)){
+                sym++;
+            }
+        }
+
+        return lower * 2 + upper * 2 + num * 4 + sym * 6;
+    }
+
 </script>
 </body>
 </html>
